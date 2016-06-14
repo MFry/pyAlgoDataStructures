@@ -5,6 +5,9 @@
 -	Each of the five arguments will contain between 0 and 50 elements inclusive.
 -	Each element of each of the arguments will be between 0 and 180,000 inclusive.
 -	The elements within each of the arguments will be in strictly increasing order.
+
+
+Hint: Activity Selection, Greedy Algorithm
 """
 
 
@@ -65,6 +68,7 @@ def max_credit(judge1, judge2, judge3, judge4, judge5):
         judges = updated_judgements
 
     return intervals[1:]
+
 
 def main():
     j1 = [1, 2, 3, 4, 5, 6]
