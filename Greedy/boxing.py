@@ -15,26 +15,66 @@ def max_credit(judge1, judge2, judge3, judge4, judge5):
     #print('Max size:', max_size)
     intervals = [(-1, -1)]
 
-
-    def find_smallest_interval(judges):
-        interval_found = (min([j[0] for j in judges]), min([j[0] for j in judges]))
-        votes = [False * 5]
+    def find_smallest_interval(judges, min_interval):
+        # find a min interval that's larger than min_interval that contains at least 3 votes
+        flattened_votes = set()
+        for judge in judges:
+            if judge:
+                for vote in judge:
+                    flattened_votes.add(vote)
+        if not flattened_votes:
+            return -1,-1
+        lower_bound = min(flattened_votes)
+        upper_bound = lower_bound
         while True:
-            for i, judge in enumerate(judges):
+            votes = 0
+            for judge in judges:
                 if judge:
                     for vote in judge:
-                        if vote > interval_found[1]:
+                        if vote <= upper_bound:
+                            votes += 1
                             break
-                        else:
-                            votes[i] = True
-            i = 0
-            for vote in votes:
-                i += 1
-            if i >= 3:
-                break
+            if votes >= 3:
+                return lower_bound, upper_bound
             else:
-                interval_found()
-        return interval_found
+                flattened_votes -= {upper_bound}
+                if flattened_votes:
+                    upper_bound = min(flattened_votes)
+                else:
+                    return -1,-1
+
+    previous_interval = intervals[-1][1]
+    while True:
+        interval = find_smallest_interval(judges, previous_interval+1)
+        if interval[0] < 0:
+            return intervals[1:]
+        intervals.append(interval)
+        previous_interval = intervals[-1][1]
+        # trim votes
+        updated_judgements = []
+        for judge in judges:
+            if judge:
+                i = 0
+                for vote in judge:
+                    if vote <= previous_interval:
+                        i += 1
+                    else:
+                        break
+                updated_judgements.append(judge[i:])
+            else:
+                updated_judgements.append([])
+        judges = updated_judgements
+
+
+    return intervals[1:]
+
+
+j1 = [1,2,3,4,5,6]
+j2 = [1,2,3,4,5,6,7]
+j3 = [1,2,3,4,5,6,7]
+j4 = [0,1,2]
+j5 = [1,2,3,4,5,6,7,8]
+print(max_credit(j1,j2,j3,j4,j5))
 
         # find smallest interval that at least three judges agree upon
 
