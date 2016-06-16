@@ -8,6 +8,7 @@
 
 
 Hint: Activity Selection, Greedy Algorithm
+https://community.topcoder.com/tc?module=Static&d1=match_editorials&d2=tco04_online_rd_3
 """
 
 
