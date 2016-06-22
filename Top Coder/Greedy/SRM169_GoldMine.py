@@ -13,7 +13,6 @@ def GoldMine(mines, miners):
     # Construct value table
     mines_value = []
     for mine in mines:
-        miners_calc = 0
         mine_value = []
         miners_used = 0
         while miners_used <= miners:
