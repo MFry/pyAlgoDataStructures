@@ -8,7 +8,7 @@
 
 def original(blurred):
     blurred = [[int(i) for i in row] for row in blurred]
-    original = [['.'] * len(blurred[0]) for _ in range(len(blurred))]
+    original_image = [['.'] * len(blurred[0]) for _ in range(len(blurred))]
 
     def find_white(center_i, center_j, count):
         """
@@ -26,7 +26,7 @@ def original(blurred):
             if i == 0 or i > len(blurred) - 2 or j == 0 or j > len(blurred[i]) - 2:
                 pass
             else:
-                if original[i][j] != '#':
+                if original_image[i][j] != '#':
                     to_fill.append((i, j))
                     count -= 1
                     if count == 0:
@@ -53,12 +53,12 @@ def original(blurred):
             if blurred[i][j] != 0:
                 to_fill = find_white(i, j, blurred[i][j])
                 for x, y in to_fill:
-                    original[x][y] = '#'
+                    original_image[x][y] = '#'
                     update(x, y)
 
     # convert list into a readable output
     out = ''
-    for row in original:
+    for row in original_image:
         for ele in row:
             out += ele
         out += '\n'
