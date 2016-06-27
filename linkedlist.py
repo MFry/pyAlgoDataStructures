@@ -24,6 +24,10 @@ class Node:
     def next_node(self, node):
         self._next_node = node
 
+    def __str__(self):
+        out = '['+str(self.value)+']'
+        return out
+
 
 class LinkedList:
     def __init__(self, val=None):
@@ -81,7 +85,7 @@ class LinkedList:
         out = ''
         n = self.head
         while n:
-            out += str(n.value)
+            out += str(n)
             out += ' - '
             n = n.next_node
         return out
