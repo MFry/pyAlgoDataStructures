@@ -31,17 +31,11 @@ class Node:
 
 class LinkedList:
     def __init__(self, val=None):
+        self._head = None
+        self._tail = None
+        self._length = 0
         if val:
-            self._set_first(val)
-        else:
-            self._head = None
-            self._tail = None
-            self._length = 0
-
-    def _set_first(self, val):
-        self._head = Node(val)
-        self._tail = self._head
-        self._length = 1
+            self.add(val)
 
     @property
     def tail(self):
@@ -69,14 +63,25 @@ class LinkedList:
     def head(self, node):
         self._head = node
 
-    def add(self, val):
-        n = Node(val)
+    def add(self, val=None, node=None):
+        if val is not None:
+            n = Node(val)
+        elif node:
+            n = node
         if not self.head:
-            self._set_first(val)
+            self._set_first(n)
         else:
-            self.tail.next_node = n
-            self.tail = n
-            self._length += 1
+            self._add(n)
+
+    def _set_first(self, node):
+        self._head = node
+        self._tail = self._head
+        self._length += 1
+
+    def _add(self, node):
+        self.tail.next_node = node
+        self.tail = node
+        self._length += 1
 
     def __len__(self):
         return self._length
@@ -89,3 +94,12 @@ class LinkedList:
             out += ' - '
             n = n.next_node
         return out
+
+t = LinkedList()
+print(t.head is None)
+t.add(5)
+print(t.head)
+for i in range(10):
+    t.add(i)
+print(t)
+print(len(t) == 11)
