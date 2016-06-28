@@ -1,5 +1,12 @@
 import unittest
 
+"""
+    Problem: https://community.topcoder.com/stat?c=problem_statement&pm=1259&rd=4493
+
+    Hint: Can be solved in a similar fashion to the problem of finding the longest non-decreasing
+            sequence.
+"""
+
 
 def ZigZag(sequence):
     computed_lengths = [(-1, 0)] * len(sequence)
