@@ -71,6 +71,21 @@ class PostingList(linkedlist.LinkedList):
         return out
 
 
+def copy_posting_list(posting_list):
+    """
+    Copy function that takes O(n) time and O(1) space
+
+    :param posting_list:
+     :type posting_list: PostingList
+    :return:
+     :rtype: PostingList
+    """
+    post_copy = PostingList()
+    for node in posting_list:
+        post_copy.add(val=node.value)
+    return posting_list
+
+
 class MyTestCase(unittest.TestCase):
     def test_PostingList(self):
         test = PostingList('a')
