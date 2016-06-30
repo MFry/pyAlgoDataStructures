@@ -38,6 +38,30 @@ class PostingList(linkedlist.LinkedList):
             n = node
         linkedlist.LinkedList.add(self, node=n)
 
+    def _find_node(self, val):
+        n = self.head
+        while n is not None:
+            if n.value == val:
+                return n
+            n = n.next_node
+        return None
+
+    def set_connection(self, start, end=None):
+        n = self._find_node(start)
+        connection = self._find_node(end)
+        n.posting = connection
+
+    def __iter__(self):
+        self._current = self.head
+        return self
+
+    def __next__(self):
+        if self._current.next_node is None:
+            raise StopIteration
+        n = self._current
+        self._current = self._current.next_node
+        return n
+
     def __str__(self):
         out = ''
         n = self.head
@@ -47,8 +71,18 @@ class PostingList(linkedlist.LinkedList):
         return out
 
 
-test = PostingList('a')
-test.add('b')
-test.add('c')
-test.add('d')
-print(test)
+class MyTestCase(unittest.TestCase):
+    def test_PostingList(self):
+        test = PostingList('a')
+        test.add('b')
+        test.add('c')
+        test.set_connection('a', 'c')
+        test.add('d')
+        test.set_connection('b', 'd')
+        test.set_connection('c', 'b')
+        test.set_connection('d', 'd')
+        print(test)
+
+
+if __name__ == '__main__':
+    unittest.main()
