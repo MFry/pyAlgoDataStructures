@@ -4,6 +4,7 @@ import unittest
     Problem Statement: https://community.topcoder.com/stat?c=problem_statement&pm=2402&rd=5009
 """
 
+
 def maxDonations(donations):
     computed_donations = [(0, 0)] * len(donations)
     computed_donations[0] = [(donations[0], 0)]
