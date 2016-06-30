@@ -1,6 +1,7 @@
 """
     Very basic implementation of a linked list
 """
+import unittest
 
 
 class Node:
@@ -95,11 +96,18 @@ class LinkedList:
             n = n.next_node
         return out
 
-t = LinkedList()
-print(t.head is None)
-t.add(5)
-print(t.head)
-for i in range(10):
-    t.add(i)
-print(t)
-print(len(t) == 11)
+
+class MyTestCase(unittest.TestCase):
+    def test_LinkedList(self):
+        t = LinkedList()
+        self.assertTrue(t.head, None)
+        t.add(5)
+        self.assertTrue(t.head.value, 5)
+        for i in range(10):
+            t.add(i)
+        print(t)
+        self.assertTrue(len(t), 11)
+
+
+if __name__ == '__main__':
+    unittest.main()
