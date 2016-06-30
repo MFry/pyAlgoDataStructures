@@ -13,7 +13,7 @@ class PostingList(linkedlist.LinkedList):
             :param posting:
             :type posting: PostingNode
             """
-            linkedlist.Node.__init__(value)
+            linkedlist.Node.__init__(self, value)
             self._posting_node = posting
 
         @property
@@ -25,18 +25,30 @@ class PostingList(linkedlist.LinkedList):
             self._posting_node = post_node
 
         def __str__(self):
-            return '[Val]'+str(self.value)+'[Post]'+str(self.posting.value) +' -'
+            if self.posting:
+                post_value = self.posting.value
+            else:
+                post_value = self.posting
+            return '[Val]' + str(self.value) + '[Post]' + str(post_value) + ' - '
 
     def add(self, val=None, node=None, post_node=None):
         if val:
             n = PostingList.PostingNode(val, post_node)
         elif node:
             n = node
-        linkedlist.LinkedList._add(node=n)
+        linkedlist.LinkedList.add(self, node=n)
 
+    def __str__(self):
+        out = ''
+        n = self.head
+        while n is not None:
+            out += str(n)
+            n = n.next_node
+        return out
 
 
 test = PostingList('a')
 test.add('b')
 test.add('c')
 test.add('d')
+print(test)
