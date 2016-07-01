@@ -56,7 +56,7 @@ class PostingList(linkedlist.LinkedList):
         return self
 
     def __next__(self):
-        if self._current.next_node is None:
+        if self._current is None:
             raise StopIteration
         n = self._current
         self._current = self._current.next_node
@@ -83,11 +83,25 @@ def copy_posting_list(posting_list):
     post_copy = PostingList()
     for node in posting_list:
         post_copy.add(val=node.value)
+
+    org_node = posting_list.head
+    copy_node = post_copy.head
+
+    while org_node and copy_node:
+        org_next = org_node.next_node
+        copy_next = copy_node.next_node
+
+        org_node.next_node = copy_node
+        copy_node.next_node = org_next
+
+        org_node = org_next
+        copy_node = copy_next
+
     return posting_list
 
 
 class MyTestCase(unittest.TestCase):
-    def test_PostingList(self):
+    def setUp(self):
         test = PostingList('a')
         test.add('b')
         test.add('c')
@@ -96,8 +110,15 @@ class MyTestCase(unittest.TestCase):
         test.set_connection('b', 'd')
         test.set_connection('c', 'b')
         test.set_connection('d', 'd')
+        self.posting_list = test
+
+    def test_PostingList(self):
+        test = self.posting_list
         print(test)
 
+    def test_copy(self):
+        test = self.posting_list
+        print(copy_posting_list(test))
 
 if __name__ == '__main__':
     unittest.main()
