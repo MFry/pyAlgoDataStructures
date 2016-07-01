@@ -17,10 +17,10 @@ class SudokuBoard:
             return self._is_valid()
 
         def __setitem__(self, key, value):
-            if 9 < value < 0:
-                raise ValueError('Number ' + str(value) + ' is out of bounds')
+            x, y = key
+            x, y = SudokuBoard._convert_index(x, y)
             self._used_numbers[value] = value
-            self._block[key] = value
+            self._block[x][y] = value
 
         def __getitem__(self, item):
             return self._block[item]
@@ -38,6 +38,14 @@ class SudokuBoard:
         column //= 3
         return row, column
 
+    def __str__(self):
+        out = ''
+        for row in self._board:
+            out += '|'
+            for i in len(row):
+                for j, _ in enumerate(row):
+                    out += row[j][i]
+
     def __getitem__(self, item):
         x, y = item
         row, column = self._convert_index(x, y)
@@ -46,8 +54,7 @@ class SudokuBoard:
     def __setitem__(self, key, value):
         x, y = key
         row, column = self._convert_index(x, y)
-        index = row % 3 + column % 3
-        self._board[row][column][index] = value
+        self._board[row][column][x % 3][x % 3] = value
 
 
 class MyTestCase(unittest.TestCase):
