@@ -56,6 +56,11 @@ class PostingList(linkedlist.LinkedList):
         return self
 
     def __next__(self):
+        """
+
+        :return:
+        :rtype: PostingList.PostingNode
+        """
         if self._current is None:
             raise StopIteration
         n = self._current
@@ -75,18 +80,20 @@ def copy_posting_list(posting_list):
     """
     Copy function that takes O(n) time and O(1) space
 
+
     :param posting_list:
      :type posting_list: PostingList
     :return:
      :rtype: PostingList
     """
     post_copy = PostingList()
+    # Create linked List
     for node in posting_list:
         post_copy.add(val=node.value)
 
     org_node = posting_list.head
     copy_node = post_copy.head
-
+    # linked the two linked lists so that we get a dictionary like lookup
     while org_node and copy_node:
         org_next = org_node.next_node
         copy_next = copy_node.next_node
@@ -96,6 +103,24 @@ def copy_posting_list(posting_list):
 
         org_node = org_next
         copy_node = copy_next
+
+    org_node = posting_list.head
+    # connect the copied lists postings
+    while org_node:
+        copy_node = org_node.next_node
+        copy_node.posting = org_node.posting.next_node
+        org_node = copy_node.next_node
+    # undue the linking
+    org_node = posting_list.head
+    prev_copy_node = org_node.next_node
+    while prev_copy_node.next_node:
+        next_node = prev_copy_node.next_node
+        copy_node = next_node.next_node
+        org_node.next_node = next_node
+        prev_copy_node.next_node = copy_node
+        org_node = org_node.next_node
+        prev_copy_node = prev_copy_node.next_node
+    org_node.next_node = None
 
     return posting_list
 
