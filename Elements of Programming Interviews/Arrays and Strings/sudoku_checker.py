@@ -106,6 +106,7 @@ def check_sudoku(board):
         while j < len(board):
             block_check = [False] * (len(board) + 1)
             while block_row < 3:
+                block_column = 0
                 while block_column < 3:
                     if block_check[board[i+block_row][j+block_column]]:
                         return False
@@ -114,7 +115,7 @@ def check_sudoku(board):
                     block_column += 1
                 block_row += 1
             block_row = 0
-            j += block_column
+            j += 3
         i += 3
 
     return True
