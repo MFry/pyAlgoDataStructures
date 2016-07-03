@@ -41,10 +41,12 @@ class SudokuBoard:
     def __str__(self):
         out = ''
         for row in self._board:
-            out += '|'
-            for i in len(row):
+            for i in range(len(row)):
+                out += '|'
                 for j, _ in enumerate(row):
-                    out += row[j][i]
+                    out += str(self._board[j][i])
+                out += '|\n'
+        return out
 
     def __getitem__(self, item):
         x, y = item
@@ -57,12 +59,105 @@ class SudokuBoard:
         self._board[row][column][x % 3][x % 3] = value
 
 
+def check_sudoku(board):
+    """
+        Given a 9 x 9 board check whether the sudoku is valid or partially valid
+    :param board:
+     :type board: list of list
+    :return:
+    :rtype: bool
+    """
+    # XXX XXX XXX
+    # XXX XXX XXX
+    # XXX XXX XXX
+
+    # XXX XXX XXX
+    # XXX XXX XXX
+    # XXX XXX XXX
+
+    # XXX XXX XXX
+    # XXX XXX XXX
+    # XXX XXX XXX
+
+    # check the rows
+    for i, row in enumerate(board):
+        valid_row = [False] * (len(row) + 1)
+        for j, val in enumerate(row):
+            if valid_row[val]:
+                return False
+            if val != 0:
+                valid_row[val] = True
+
+    # check the columns
+    for i, _ in enumerate(board[0]):
+        valid_row = [False] * (len(board) + 1)
+        for j, _ in enumerate(board):
+            if valid_row[board[j][i]]:
+                return False
+            if val != 0:
+                valid_row[board[j][i]] = True
+
+    # check the blocks
+    block_row = 0
+    block_column= 0
+    i = 0
+    while i < len(board):
+        j = 0
+        while j < len(board):
+            block_check = [False] * (len(board) + 1)
+            while block_row < 3:
+                while block_column < 3:
+                    if block_check[board[i+block_row][j+block_column]]:
+                        return False
+                    if board[i+block_row][j+block_column]:
+                        block_check[board[i+block_row][j+block_column]] = True
+                    block_column += 1
+                block_row += 1
+            block_row = 0
+            j += block_column
+        i += 3
+
+    return True
+
+
 class MyTestCase(unittest.TestCase):
     def test_sudoku_access(self):
         t = SudokuBoard()
         t[0, 0] = 1
         t[8, 8] = 8
-        print(t)
+        # print(t)
+
+    def test_check_sudoku(self):
+        test_board = [[1, 2, 3, 4, 0, 6, 7, 0, 9],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.assertTrue(check_sudoku(test_board))
+        test_board = [[1, 2, 3, 4, 0, 6, 7, 0, 9],
+                      [2, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.assertFalse(check_sudoku(test_board))
+        test_board = [[1, 2, 3, 0, 0, 6, 7, 0, 9],
+                      [5, 6, 7, 0, 0, 0, 0, 0, 0],
+                      [4, 0, 9, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 2, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 2, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.assertFalse(check_sudoku(test_board))
 
 
 if __name__ == '__main__':
