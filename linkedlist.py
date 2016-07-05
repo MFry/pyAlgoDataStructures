@@ -84,6 +84,25 @@ class LinkedList:
         self.tail = node
         self._length += 1
 
+    def get(self, val):
+        found_node = None
+        for node in self:
+            if node.value == val:
+                found_node = node
+                break
+        return found_node
+
+    def __iter__(self):
+        self._current = self.head
+        return self
+
+    def __next__(self):
+        if self._current is None:
+            raise StopIteration
+        next_node = self._current
+        self._current = self._current.next_node
+        return next_node
+
     def __len__(self):
         return self._length
 
@@ -100,13 +119,14 @@ class LinkedList:
 class MyTestCase(unittest.TestCase):
     def test_LinkedList(self):
         t = LinkedList()
-        self.assertTrue(t.head, None)
+        self.assertEqual(t.head, None)
         t.add(5)
-        self.assertTrue(t.head.value, 5)
+        self.assertEqual(t.head.value, 5)
         for i in range(10):
             t.add(i)
-        print(t)
-        self.assertTrue(len(t), 11)
+        self.assertEqual(str(t), '[5] - [0] - [1] - [2] - [3] - [4] - [5] - [6] - [7] - [8] - [9] - ')
+        self.assertEqual(len(t), 11)
+        self.assertEqual(t.get(5).value, 5)
 
 
 if __name__ == '__main__':
