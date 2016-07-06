@@ -1,6 +1,6 @@
 import unittest
 """
-Implement queue using two stacks and O(1) additional space
+Implement queue using two stacks and O(1) additional space and sequence of m queues and dequeues should take O(m) time
 """
 
 
@@ -25,8 +25,6 @@ class StacksSimulatedQueue:
         return self._stack2.pop()
 
 
-
-
 class MyTestCase(unittest.TestCase):
     def test_StacksSimulatedQueue(self):
         test = StacksSimulatedQueue()
@@ -35,3 +33,4 @@ class MyTestCase(unittest.TestCase):
         test.enqueue(6)
         test.enqueue(7)
         self.assertEqual(test.dequeque(), 6)
+        self.assertEqual(test.dequeque(), 7)
