@@ -1,3 +1,9 @@
+import unittest
+
+"""
+http://www.tutorialspoint.com/data_structures_algorithms/binary_search_tree.htm
+"""
+
 class TreeNode:
     def __init__(self, value):
         self._data = value
@@ -15,6 +21,8 @@ class TreeNode:
     def parent(self, node):
         self._parent = node
 
+    def __str__(self):
+        return '[' + str(self.value) + ']'
 
 class BSTNode(TreeNode):
     def __init__(self, value):
@@ -119,6 +127,8 @@ class BinarySearchTree(Tree):
         nodes = []
         n = self.root
         nodes.append(n)
+        depth = 0
+        # [P]: X [D:] d [C:]{c1,c2}
         while nodes:
             t = []
             for n in nodes:
@@ -142,4 +152,12 @@ print(test)
 test.delete(4)
 print(test)
 
+test2 = BinarySearchTree(BSTNode(27))
+test2.insert(35)
+test2.insert(14)
+test2.insert(42)
+test2.insert(31)
+test2.insert(10)
+test2.insert(19)
+print(test2)
 # https://www.topcoder.com/community/data-science/data-science-tutorials/an-introduction-to-binary-search-and-red-black-trees/
