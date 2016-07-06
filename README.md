@@ -7,3 +7,6 @@ Various Solutions to programming problems on Top Coder, Cracking the  Coding Int
  and Elements of Programming Interview(EPI)
  
 Various Data structures implementations
+
+#### Interesting problems
+5.12 Queue from two stacks 
