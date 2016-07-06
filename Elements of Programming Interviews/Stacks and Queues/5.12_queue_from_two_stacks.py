@@ -17,14 +17,14 @@ class StacksSimulatedQueue:
         return full_stack, empty_stack
 
     def enqueue(self, x):
-        if len(self._stack2) > 0:
-            self._stack2, self._stack1 = self._swap_stacks(self._stack2, self._stack1)
         self._stack1.append(x)
 
     def dequeque(self):
-        if len(self._stack1) > 0:
+        if len(self._stack2) == 0:
             self._stack1, self._stack2 = self._swap_stacks(self._stack1, self._stack2)
         return self._stack2.pop()
+
+
 
 
 class MyTestCase(unittest.TestCase):
