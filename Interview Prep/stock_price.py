@@ -24,6 +24,8 @@ def get_max_profits(yesterday_prices):
     :param yesterday_prices:
     :return:
     """
+    if len(yesterday_prices) < 2:
+        raise IndexError('Calculating profit requires at least two values')
     min_buy = float('inf')
     max_price = float('-inf')
     for sell_price in yesterday_prices:
