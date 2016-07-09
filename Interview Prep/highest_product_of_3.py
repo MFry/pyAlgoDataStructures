@@ -12,6 +12,8 @@ def highest_product(list_of_ints):
     largest_numbers = [float('-inf')] * 3
     smallest_negative = [float('inf')] * 2
     min_largest = min(largest_numbers)
+    # Find the three largest numbers
+    # And the two smallest numbers
     for item in list_of_ints:
         if item > min_largest:
             largest_numbers.remove(min_largest)
@@ -23,7 +25,9 @@ def highest_product(list_of_ints):
                 smallest_negative.remove(max_smallest)
                 smallest_negative.append(item)
     largest_negative_2_product = reduce(mul, smallest_negative)
+    # the largest product based on the three largest numbers
     largest_product = reduce(mul, largest_numbers)
+    # first check if largest product is greater than zero in case the entire array is negative
     if largest_product > 0 and largest_negative_2_product > 0:
         largest_numbers = sorted(largest_numbers)
         largest = largest_numbers[-1]
