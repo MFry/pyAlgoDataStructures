@@ -1,5 +1,9 @@
 import unittest
 
+"""
+    Problem 1
+    Greedy
+"""
 
 def brute_get_max_profits(yesterday_prices):
     """
