@@ -5,6 +5,7 @@ import unittest
     Greedy
 """
 
+
 def brute_get_max_profits(yesterday_prices):
     """
         Brute Force method

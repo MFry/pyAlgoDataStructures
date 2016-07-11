@@ -3,6 +3,8 @@ import unittest
 Problem 4
 Greedy
 """
+
+
 def condense_meeting_times(start_end_times):
     start_end_times.sort(key=lambda start_end_time: start_end_time[0])
     condensed_times = []
