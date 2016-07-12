@@ -1,6 +1,7 @@
 import unittest
 """
-Problem 6:
+Problem 6
+Implementation
 """
 
 sample_rectangle = {
