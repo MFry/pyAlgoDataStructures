@@ -90,6 +90,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(find_line_overlap(7, 8, 2, 5), None)
 
     def test_love_match(self):
+        # rectangle created from two rectangles touching
         test_rectangle_1 = {
             'left_x': 5,
             'bottom_y': 2,
@@ -112,6 +113,7 @@ class MyTestCase(unittest.TestCase):
         for key in correct_rectangle:
             self.assertEqual(correct_rectangle[key],
                              answer_rectangle[key])
+        # One rectangle entirely inside another
         test_rectangle_1 = {
             'left_x': 5,
             'bottom_y': 2,
@@ -129,6 +131,29 @@ class MyTestCase(unittest.TestCase):
             'bottom_y': 3,
             'width': 1,
             'height': 5
+        }
+        answer_rectangle = love_match(test_rectangle_1, test_rectangle_2)
+        for key in correct_rectangle:
+            self.assertEqual(correct_rectangle[key],
+                             answer_rectangle[key])
+        # Rectangles touch at a point
+        test_rectangle_1 = {
+            'left_x': 10,
+            'bottom_y': 3,
+            'width': 5,
+            'height': 4
+        }
+        test_rectangle_2 = {
+            'left_x': 15,
+            'bottom_y': 7,
+            'width': 5,
+            'height': 3
+        }
+        correct_rectangle = {
+            'left_x': 15,
+            'bottom_y': 7,
+            'width': 0,
+            'height': 0
         }
         answer_rectangle = love_match(test_rectangle_1, test_rectangle_2)
         for key in correct_rectangle:
