@@ -4,6 +4,7 @@ import unittest
 http://www.tutorialspoint.com/data_structures_algorithms/binary_search_tree.htm
 """
 
+
 class TreeNode:
     def __init__(self, value):
         self._data = value
@@ -23,6 +24,7 @@ class TreeNode:
 
     def __str__(self):
         return '[' + str(self.value) + ']'
+
 
 class BSTNode(TreeNode):
     def __init__(self, value):
