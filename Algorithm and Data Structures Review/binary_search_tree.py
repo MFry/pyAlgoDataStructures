@@ -4,6 +4,7 @@ import unittest
 Notes
 In Order Traversal http://articles.leetcode.com/binary-search-tree-in-order-traversal
 Post Order Traversal: http://articles.leetcode.com/binary-tree-post-order-traversal
+Tree height:
 """
 
 
@@ -62,6 +63,19 @@ class BinaryTreeNode:
 def find_max_depth(binary_tree):
     current_tree_level = [binary_tree]
     max_depth = 0
+    while True:
+        node_count = len(current_tree_level)
+        if node_count == 0:
+            return max_depth
+        max_depth += 1
+        while node_count > 0:
+            current_node = current_tree_level.pop(0)
+            if current_node.left:
+                current_tree_level.append(current_node.left)
+            if current_node.right:
+                current_tree_level.append(current_node.right)
+            node_count -= 1
+    return max_depth
 
 
 def in_order_traversal(binary_search_tree):
@@ -121,3 +135,13 @@ class MyTestCases(unittest.TestCase):
         bst_test.right.right.insert_right(7)
         self.assertEqual(in_order_traversal(bst_test), '1 2 3 4 5 6 7 ')
         print(pre_order_traversal(bst_test))
+
+    def test_max_depth(self):
+        bst_test = BinaryTreeNode(1)
+        bst_test.insert_left(2)
+        bst_test.insert_right(3)
+        bst_test.left.insert_left(4)
+        bst_test.left.insert_right(5)
+        bst_test.right.insert_right(6)
+        bst_test.right.right.insert_right(7)
+        self.assertEqual(find_max_depth(bst_test), 4)
