@@ -1,8 +1,8 @@
-import unittest
 """
 Problem 4
 Greedy
 """
+import unittest
 
 
 def condense_meeting_times(start_end_times):

@@ -1,8 +1,8 @@
-import unittest
-
 """
 Problem 7
+Implementation, lazy/eager processing
 """
+import unittest
 
 
 class TempTracker:

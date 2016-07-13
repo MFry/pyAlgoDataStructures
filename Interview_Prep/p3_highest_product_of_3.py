@@ -1,11 +1,10 @@
-import unittest
-from functools import reduce
-from operator import mul
-
 """
     Problem 3
     Greedy
 """
+import unittest
+from functools import reduce
+from operator import mul
 
 
 def highest_product(list_of_ints):

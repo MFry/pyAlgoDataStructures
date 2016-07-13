@@ -1,8 +1,8 @@
-import unittest
 """
 Problem 6
 Implementation
 """
+import unittest
 
 sample_rectangle = {
     # bottom left corner

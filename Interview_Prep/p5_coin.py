@@ -1,9 +1,8 @@
-import unittest
-
 """
 Problem 5
 Dynamic Programming
 """
+import unittest
 
 
 def coin_permutations(amount, coins):

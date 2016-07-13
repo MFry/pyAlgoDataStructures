@@ -1,9 +1,8 @@
-import unittest
-
 """
     Problem 1
     Greedy
 """
+import unittest
 
 
 def brute_get_max_profits(yesterday_prices):
