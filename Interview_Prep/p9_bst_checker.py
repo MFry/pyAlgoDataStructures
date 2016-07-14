@@ -1,6 +1,6 @@
 """
  Problem 9
- Implementation, Tree
+ Greedy/Divide and Conquer, Tree
 """
 import unittest
 from Algorithm_and_Data_Structures_Review.binary_search_tree import BinaryTreeNode
