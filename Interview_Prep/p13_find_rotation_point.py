@@ -34,3 +34,10 @@ class MyTestCase(unittest.TestCase):
                  'karpatka',
                  'othellolagkage']
         self.assertEqual(find_rotation(words), 4)
+        words = ['a',
+                 'b',
+                 'c',
+                 'd',
+                 'e',
+                 'f']
+        self.assertEqual(find_rotation(words), -1)
