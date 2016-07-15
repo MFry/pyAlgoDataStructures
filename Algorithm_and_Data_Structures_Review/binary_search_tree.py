@@ -10,7 +10,7 @@ Tree height:
 
 class BinaryTreeNode:
     def __init__(self, value):
-        self.value = value
+        self._value = value
         self._left = None
         self._right = None
 
@@ -33,6 +33,10 @@ class BinaryTreeNode:
         """
         self._right = BinaryTreeNode(value)
         return self._right
+
+    @property
+    def value(self):
+        return self._value
 
     @property
     def left(self):
