@@ -8,7 +8,6 @@ import unittest
 def find_rotation(word_list):
     lower_bound = 0
     upper_bound = len(word_list) - 1
-    fird_word = word_list[0]
 
     while lower_bound < upper_bound:
         mid_point = lower_bound + (upper_bound-lower_bound) // 2
