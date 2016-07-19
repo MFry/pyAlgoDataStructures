@@ -11,7 +11,17 @@ import unittest
 
 
 def index_element_equality(arr):
-    pass
+    lower_bound = 0
+    upper_bound = len(arr) - 1
+    while lower_bound <= upper_bound:
+        mid_point = lower_bound + (upper_bound - lower_bound) // 2
+        if mid_point == arr[mid_point]:
+            return mid_point
+        elif mid_point > arr[mid_point]:
+            lower_bound = mid_point + 1
+        elif mid_point < arr[mid_point]:
+            upper_bound = mid_point - 1
+    return -1
 
 
 class MyTestCase(unittest.TestCase):
@@ -20,3 +30,5 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(index_element_equality(arr), 2)
         arr = [-1, 0, 3, 6]
         self.assertEqual(index_element_equality(arr), -1)
+        arr = [-1, 1]
+        self.assertEqual(index_element_equality(arr), 1)
