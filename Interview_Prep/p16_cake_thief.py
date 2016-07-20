@@ -4,6 +4,7 @@
     0: An integer representing the weight of the cake in kilograms
     1: An integer representing the monetary value of the cake in British pounds
     Problem 16
+    Bottom-up, dynamic programming
 """
 import unittest
 import functools
