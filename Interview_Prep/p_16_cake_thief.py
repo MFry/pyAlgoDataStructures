@@ -37,15 +37,17 @@ def greedy_max_duffel_bag_value(cake_tuples, capacity):
 
 
 def max_duffel_bag_value(cake_tuples, capacity):
-    possible_pounds_stolen = [0] * capacity + 1
+    possible_profit_at_weight = [0] * (capacity + 1)
     cake_tuples.sort(key=lambda x: x[0])
     # check if weight is 0 and money > 0, return infinity
-    best_profit_made = 0
     for cake_tuple in cake_tuples:
-        for pounds_stolen_per_weight in possible_pounds_stolen[cake_tuple[0]:]:
-            # check if we can make better profit at the given weight than what we have so far
-            pass
-    return best_profit_made
+        weight = cake_tuple[0]
+        while weight < len(possible_profit_at_weight):
+            possibly_value = possible_profit_at_weight[weight-cake_tuple[0]] + cake_tuple[1]
+            if possibly_value > possible_profit_at_weight[weight]:
+                possible_profit_at_weight[weight] = possible_profit_at_weight[weight-cake_tuple[0]] + cake_tuple[1]
+            weight += cake_tuple[0]
+    return max(possible_profit_at_weight)
 
 
 class MyTestCases(unittest.TestCase):
