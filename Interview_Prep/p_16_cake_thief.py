@@ -27,6 +27,13 @@ def sort_cakes(cake1, cake2):
 
 
 def greedy_max_duffel_bag_value(cake_tuples, capacity):
+    """
+        NOTE: Incorrect greedy solution that may at first look and work correctly for some cases
+
+    :param cake_tuples:
+    :param capacity:
+    :return:
+    """
     cake_tuples.sort(key=functools.cmp_to_key(sort_cakes))
     british_pounds_made = 0
     for cake_tuple in cake_tuples:
@@ -37,17 +44,18 @@ def greedy_max_duffel_bag_value(cake_tuples, capacity):
 
 
 def max_duffel_bag_value(cake_tuples, capacity):
-    possible_profit_at_weight = [0] * (capacity + 1)
-    cake_tuples.sort(key=lambda x: x[0])
-    # check if weight is 0 and money > 0, return infinity
+    profit_at_weight = [0] * (capacity + 1)
     for cake_tuple in cake_tuples:
-        weight = cake_tuple[0]
-        while weight < len(possible_profit_at_weight):
-            possibly_value = possible_profit_at_weight[weight-cake_tuple[0]] + cake_tuple[1]
-            if possibly_value > possible_profit_at_weight[weight]:
-                possible_profit_at_weight[weight] = possible_profit_at_weight[weight-cake_tuple[0]] + cake_tuple[1]
-            weight += cake_tuple[0]
-    return max(possible_profit_at_weight)
+        if cake_tuple[0] == 0 and cake_tuple[1] > 0:
+            return float('inf')
+    # check if weight is 0 and money > 0, return infinity
+    for i in range(len(profit_at_weight)):
+        for cake_tuple in cake_tuples:
+            if i - cake_tuple[0] >= 0:
+                potential_profit = profit_at_weight[i - cake_tuple[0]] + cake_tuple[1]
+                if potential_profit > profit_at_weight[i]:
+                    profit_at_weight[i] = potential_profit
+    return max(profit_at_weight)
 
 
 class MyTestCases(unittest.TestCase):
@@ -55,3 +63,6 @@ class MyTestCases(unittest.TestCase):
         cake_tuples = [(7, 160), (3, 90), (2, 15)]
         capacity = 20
         self.assertEqual(max_duffel_bag_value(cake_tuples, capacity), 555)
+        cake_tuples = [(3, 40), (5, 70)]
+        capacity = 9
+        self.assertEqual(max_duffel_bag_value(cake_tuples, capacity), 120)
