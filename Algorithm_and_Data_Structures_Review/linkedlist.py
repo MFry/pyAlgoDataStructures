@@ -19,6 +19,11 @@ class Node:
 
     @property
     def next_node(self):
+        """
+
+        :return:
+        :rtype : Node
+        """
         return self._next_node
 
     @next_node.setter
