@@ -36,6 +36,9 @@ You will write a function answer(population, x, y, strength), which outputs a co
 The Strength and Resistance values will be between 0 and 10000. The population grid will be at least 1x1 and no larger
  than 25x25. The x and y values will be valid indices in the population arrays, with numbering beginning from 0.
 
+
+
+Notes: Graph, Implementation, Flood fill
 """
 import unittest
 
@@ -52,7 +55,6 @@ def answer(population, x, y, strength):
     :return: outputs a copy of the input array representing the state of the
      population at the end of the simulation, in which any infected cells value has been replaced with -1.
     """
-
     def check_if_valid(x, y):
         if y < 0 or y >= len(population):
             return False
