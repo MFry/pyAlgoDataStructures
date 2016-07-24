@@ -19,10 +19,24 @@ def contains_cycle(head):
         fast_node = fast_node.next_node.next_node
         slow_node = slow_node.next_node
         if slow_node == fast_node:
-            return False
-    return True
+            return True
+    return False
 
 
 class MyTestCases(unittest.TestCase):
     def test_contains_cycles(self):
-        pass
+        test_head = Node('A')
+        test_node_b = Node('B')
+        test_node_c = Node('C')
+        test_node_d = Node('D')
+        test_head.next_node = test_node_b
+        test_node_b.next_node = test_node_c
+        test_node_c.next_node = test_node_d
+        test_node_d.next_node = test_node_b
+        self.assertFalse(contains_cycle(test_head))
+        test_node_d.next_node = test_node_d
+        self.assertFalse(contains_cycle(test_head))
+        test_node_d.next_node = test_node_c
+        self.assertFalse(contains_cycle(test_head))
+        test_node_d.next_node = None
+        self.assertTrue(contains_cycle(test_head))
