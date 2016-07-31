@@ -1,5 +1,10 @@
 """
+    Write a recursive function for generating all permutations of an input string. Return them as a set.
+    Don't worry about time or space complexity—if we wanted efficiency we'd write an iterative version.
 
+    To start, assume every character in the input string is unique.
+
+    Your function can have loops—it just needs to also be recursive.
 """
 import unittest
 
@@ -9,4 +14,11 @@ def all_permutations(string):
 
 
 class MyTestCases(unittest.TestCase):
-    def test_all_permutations(self):pass
+    def test_all_permutations(self):
+        # abc
+        # acb
+        # bca
+        # bac
+        # cab
+        # cba
+        pass
