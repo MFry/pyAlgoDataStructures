@@ -1,11 +1,10 @@
-import unittest
-
 """
 Notes
 In Order Traversal http://articles.leetcode.com/binary-search-tree-in-order-traversal
 Post Order Traversal: http://articles.leetcode.com/binary-tree-post-order-traversal
 Tree height:
 """
+import unittest
 
 
 class BinaryTreeNode:
@@ -80,6 +79,16 @@ def find_max_depth(binary_tree):
                 current_tree_level.append(current_node.right)
             node_count -= 1
     return max_depth
+
+
+def delete_bst_node(head, val):
+    """
+    http://quiz.geeksforgeeks.org/binary-search-tree-set-2-delete/
+    :param head:
+    :param val:
+    :return:
+    """
+    pass
 
 
 def in_order_traversal(binary_search_tree):
