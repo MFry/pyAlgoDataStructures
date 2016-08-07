@@ -15,29 +15,6 @@
 import unittest
 
 
-def smallest_substring(string, string_pattern):
-    pattern_histogram = {}
-    for character in string_pattern:
-        if character in pattern_histogram:
-            pattern_histogram[character] += 1
-        else:
-            pattern_histogram[character] = 1
-    found_substring = {}
-    minimum_size = 0
-    start = 0
-    end = -1
-
-    for i, character in enumerate(string):
-        if character in string_pattern:
-            if character in found_substring:
-                found_substring[character] = 0
-            else:
-                found_substring[character] += 1
-            if found_substring[character] == pattern_histogram[character]:
-                # check if we are done
-                for key in pattern_histogram:
-                    pass
-
 
 class MyTestCases(unittest.TestCase):
     def test_quad_combinations(self):
