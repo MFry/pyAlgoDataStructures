@@ -13,7 +13,7 @@ Note: If a node is unreachable , the distance is assumed as -1.
 Ref: https://www.hackerrank.com/challenges/bfsshortreach
 
 docs: https://docs.python.org/3/tutorial/datastructures.html
-      https://docs.python.org/3/library/collections.html#collections.deque
+      https://docs.python.org/3/library/heapq.html
 """
 import unittest
 from heapq import *
