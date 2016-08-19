@@ -56,7 +56,7 @@ def bfs(graph, start_node):
             if shortest_paths[node] > distance_found:
                 shortest_paths[node] = distance_found
 
-            heappush(to_visit, (distance_found, node))
+                heappush(to_visit, (distance_found, node))
 
     output = ''
     for i in range(1, len(shortest_paths)):
