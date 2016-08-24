@@ -1,4 +1,6 @@
 """
+    Difficulty: ***
+    Code: **
     Problem 2
     Greedy
 """
