@@ -17,7 +17,7 @@ def diff_number(arr):
     for i, num in enumerate(numbers_found):
         if not num:
             return i
-    if upper_bound == sys.max_int:
+    if upper_bound == sys.maxsize:
         return -1
     return upper_bound + 1
 
@@ -35,7 +35,7 @@ def diff_number(arr):
 
 
 def diff_number(arr):
-    if len(arr) == sys.max_int:
+    if len(arr) == sys.maxsize:
         return -1
     for i, val in enumerate(arr):
         if i != val:
@@ -47,7 +47,7 @@ def diff_number(arr):
 
 
 def diff_set_number(arr):
-    if len(arr) == sys.max_int:
+    if len(arr) == sys.maxsize:
         return -1
     contains = set()
     for val in arr:
