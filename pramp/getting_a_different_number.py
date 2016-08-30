@@ -5,6 +5,8 @@ ex: [9,1, 4, 3]
 
 any of the following
 output: 0, 2, 5, 1000000
+
+Python max int ref: http://stackoverflow.com/questions/7604966/maximum-and-minimum-values-for-ints
 """
 import sys
 
