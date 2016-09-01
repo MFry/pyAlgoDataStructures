@@ -29,6 +29,8 @@ NOTE: If there are edges between the same pair of nodes with different weights,
     Ref: https://www.hackerrank.com/challenges/primsmstsub
 """
 from heapq import *
+import unittest
+import sys
 
 
 def prims_mst(graph, start_node):
@@ -59,12 +61,27 @@ def prims_mst(graph, start_node):
     return min_tree_value
 
 
-graph = {
-    1: [(3, 2), (4, 3)],
-    2: [(5, 3), (3, 1), (6, 4), (2, 5)],
-    3: [(7, 5), (5, 2), (4, 1)],
-    4: [(6, 2)],
-    5: [(2, 2), (7, 3)]
-}
+class MyTestCases(unittest.TestCase):
+    def test_primps_mst(self):
+        graph = {
+            1: [(3, 2), (4, 3)],
+            2: [(5, 3), (3, 1), (6, 4), (2, 5)],
+            3: [(7, 5), (5, 2), (4, 1)],
+            4: [(6, 2)],
+            5: [(2, 2), (7, 3)]
+        }
 
-print(prims_mst(graph, 1))
+        self.assertEqual(prims_mst(graph, 1), 15)
+
+
+if __name__ == '__main__':
+    n, m = [int(i) for i in sys.stdin.readline().split()]
+    graph = {}
+    for i in range(n + 1):
+        graph[i] = []
+    for i in range(m):
+        node_1, node_2, weight = [int(j) for j in sys.stdin.readline().split()]
+        graph[node_1].append((weight, node_2))
+        graph[node_2].append((weight, node_1))
+    start_node = int(sys.stdin.readline())
+    print(prims_mst(graph, start_node))
