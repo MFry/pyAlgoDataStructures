@@ -1,5 +1,6 @@
 """
 
+ ref: https://www.hackerrank.com/challenges/kruskalmstrsub
 """
 import sys
 import unittest
