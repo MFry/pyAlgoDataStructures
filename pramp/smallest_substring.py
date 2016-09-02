@@ -1,4 +1,6 @@
 """
+    Difficulty: ****
+    Code:       *****
 Given a set T of characters and a string S, find the minimum window in S which will contain all the characters in T
 
 S = “ADOBECODEBANC”
