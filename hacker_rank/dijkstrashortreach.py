@@ -1,7 +1,7 @@
 """
 
  Ref: https://www.hackerrank.com/challenges/dijkstrashortreach
-
+ Python input ref: https://dmoj.ca/tips/
 """
 import unittest
 from heapq import *

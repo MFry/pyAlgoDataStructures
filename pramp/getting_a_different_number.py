@@ -5,6 +5,8 @@ ex: [9,1, 4, 3]
 
 any of the following
 output: 0, 2, 5, 1000000
+
+Python max int ref: http://stackoverflow.com/questions/7604966/maximum-and-minimum-values-for-ints
 """
 import sys
 
@@ -17,7 +19,7 @@ def diff_number(arr):
     for i, num in enumerate(numbers_found):
         if not num:
             return i
-    if upper_bound == sys.max_int:
+    if upper_bound == sys.maxsize:
         return -1
     return upper_bound + 1
 
@@ -35,7 +37,7 @@ def diff_number(arr):
 
 
 def diff_number(arr):
-    if len(arr) == sys.max_int:
+    if len(arr) == sys.maxsize:
         return -1
     for i, val in enumerate(arr):
         if i != val:
@@ -47,7 +49,7 @@ def diff_number(arr):
 
 
 def diff_set_number(arr):
-    if len(arr) == sys.max_int:
+    if len(arr) == sys.maxsize:
         return -1
     contains = set()
     for val in arr:

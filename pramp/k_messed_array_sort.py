@@ -1,4 +1,6 @@
 """
+    Difficulty: ****
+    Code:       ***
 Given an array arr of length n where each element is at most k places away from its sorted position,
 Plan and code an efficient algorithm to sort arr.
 Analyze the runtime and space complexity of your solution.

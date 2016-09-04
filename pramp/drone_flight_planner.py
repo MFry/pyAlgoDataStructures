@@ -1,4 +1,6 @@
 """
+    Difficulty: ***
+    Code:       *
 You are planning the amount of fuel need to complete a drone flight.
 To fly higher, the drone burns 1 liter of fuel per feet. However, flying lower charges the drone with the amount of energy equivalent to 1 liter of fuel for every feet. Flying sideways takes no energy (only flying up and down takes/charges energy).
 
@@ -43,12 +45,3 @@ def clean_solution(route):
     start_elevation = route[0][3]
     max_elevation = max(route, key=lambda x: x[3])
     return max_elevation - start_elevation
-
-    """
-       fuel = 0
-    for (_,_,e) in route:
-       if e - start_elevation > 0:
-          fuel += e - start_elevation
-          start_elevation = e
-       return fuel
-    """
