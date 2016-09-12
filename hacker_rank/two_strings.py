@@ -20,3 +20,13 @@ class MyTestCases(unittest.TestCase):
     def test_common_substring(self):
         self.assertTrue(common_substring('hello', 'world'))
         self.assertFalse(common_substring('hi', 'world'))
+
+if __name__ is '__main__':
+    total = int(input())
+    for _ in range(total):
+        a = input()
+        b = input()
+        if common_substring(a, b):
+            print('YES')
+        else:
+            print('NO')
