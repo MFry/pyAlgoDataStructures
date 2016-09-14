@@ -294,6 +294,25 @@ class MyTestCases(unittest.TestCase):
                     if radius < r:
                         radius = r
         self.assertEqual(radius, 4)
+        self.assertEqual(check_voxel_circle(grid, 2, 2), 2)
+        grid = ['*.......*',
+                '*.......*',
+                '*...*...*',
+                '*..*.*..*',
+                '*.*...*.*',
+                '*..*.*..*',
+                '*...*...*',
+                '*.......*',
+                '*.......*']
+        self.assertEqual(check_voxel_circle(grid, 4, 4), 1)
+        radius = 0
+        for i in range(len(grid)):
+            for j in range(len(grid)):
+                if grid[i][j] == '.':
+                    r = check_voxel_circle(grid, i, j)
+                    if radius < r:
+                        radius = r
+        self.assertEqual(radius, 1)
 
 
 if __name__ == '__main__':
