@@ -12,7 +12,7 @@ def is_repeating(s, sub):
 
 
 def largest_commutative_permutations(s, m):
-    factors = [i for i in range(1, ceil(sqrt(len(s))) + 1) if len(s) % i == 0] + [len(s)]
+    factors = [i for i in range(1, len(s) + 1) if len(s) % i == 0]
     for factor in factors:
         substring = s[:factor]
         if is_repeating(s, substring):
@@ -33,7 +33,21 @@ class MyTestCases(unittest.TestCase):
         s = 'abab'
         m = 3
         self.assertEqual(largest_commutative_permutations(s, m), 1)
-
+        s = 'aabaab'
+        m = 6
+        self.assertEqual(largest_commutative_permutations(s, m), 2)
+        s = 'aabaab'
+        m = 5
+        self.assertEqual(largest_commutative_permutations(s, m), 1)
+        s = 'aabaab'
+        m = 7
+        self.assertEqual(largest_commutative_permutations(s, m), 2)
+        s = 'aabaab'
+        m = 2
+        self.assertEqual(largest_commutative_permutations(s, m), 0)
+        s = 'aaaaabaaaaab'
+        m = 6
+        self.assertEqual(largest_commutative_permutations(s, m), 1)
 
 if __name__ == '__main__':
     s = sys.stdin.readline().strip()
