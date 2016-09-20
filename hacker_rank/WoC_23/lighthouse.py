@@ -14,17 +14,16 @@ def within_bounds(coords, **kwargs):
     return False
 
 
-def check_voxel_circle(grid, x, y):
+def check_voxel_circle(grid, center_x, center_y):
     bounds = {
         'top': 0,
         'left': 0,
         'bot': len(grid),
         'right': len(grid)
     }
-    q = deque()
-    q.append((x, y))
+
     visited = set()
-    visited.add((x, y))
+    visited.add((center_x, center_y))
     radius_size = 0
     temp = deque()
     while True:
@@ -35,10 +34,16 @@ def check_voxel_circle(grid, x, y):
             q, temp = temp, deque()
         (x, y) = q.popleft()
         top = (x - 1, y)
+        diag_tl = (x-1, y-1)
         left = (x, y - 1)
+        diag_bl = (x+1, y-1)
         bot = (x + 1, y)
+        diag_br = (x+1, y+1)
         right = (x, y + 1)
-        for coords in [top, left, bot, right]:
+        diag_tr = (x-1,y+1)
+        for coords in [top, diag_tl, left, diag_bl, bot, diag_br, right, diag_tr]:
+            if ((coords[0]-center_x)**2 + (coords[1]-center_y)**2) > ((radius_size+1)**2):
+                continue
             if not within_bounds(coords, **bounds) or grid[coords[0]][coords[1]] == '*':
                 return radius_size
             elif coords not in visited:
@@ -46,6 +51,7 @@ def check_voxel_circle(grid, x, y):
                 visited.add(coords)
     return radius_size
 
+#sum of the squares <= square of radius
 
 class MyTestCases(unittest.TestCase):
     def test_within_bounds(self):
@@ -76,11 +82,21 @@ class MyTestCases(unittest.TestCase):
                 '.....',
                 '.....']
         self.assertEqual(check_voxel_circle(grid, 2, 2), 1)
+        radius = 0
+        for i in range(len(grid)):
+            for j in range(len(grid)):
+                if grid[i][j] == '.':
+                    r = check_voxel_circle(grid, i, j)
+                    if radius < r:
+                        radius = r
+        self.assertEqual(radius, 1)
+
         grid = ['.....',
                 '.....',
                 '.*...',
                 '.....',
                 '.....']
+
         self.assertEqual(check_voxel_circle(grid, 2, 2), 0)
         grid = ['.*.*.',
                 '*...*',
@@ -141,6 +157,14 @@ class MyTestCases(unittest.TestCase):
                 '**.......**',
                 '*****.*****']
         self.assertEqual(check_voxel_circle(grid, 5, 5), 2)
+        radius = 0
+        for i in range(len(grid)):
+            for j in range(len(grid)):
+                if grid[i][j] == '.':
+                    r = check_voxel_circle(grid, i, j)
+                    if radius < r:
+                        radius = r
+        self.assertEqual(radius, 3)
         grid = ['...........',
                 '...........',
                 '...........',
@@ -183,6 +207,14 @@ class MyTestCases(unittest.TestCase):
                 '.....',
                 '.....']
         self.assertEqual(check_voxel_circle(grid, 2, 2), 1)
+        radius = 0
+        for i in range(len(grid)):
+            for j in range(len(grid)):
+                if grid[i][j] == '.':
+                    r = check_voxel_circle(grid, i, j)
+                    if radius < r:
+                        radius = r
+        self.assertEqual(radius, 1)
         grid = ['......................',
                 '......................',
                 '......................',
@@ -313,7 +345,40 @@ class MyTestCases(unittest.TestCase):
                     if radius < r:
                         radius = r
         self.assertEqual(radius, 1)
-
+        grid = ['*.......*',
+                '*...*...*',
+                '*..*.*..*',
+                '*.*...*.*',
+                '**.....**',
+                '*.*...*.*',
+                '*..*.*..*',
+                '*...*...*',
+                '*.......*']
+        self.assertEqual(check_voxel_circle(grid, 4, 4), 2)
+        radius = 0
+        for i in range(len(grid)):
+            for j in range(len(grid)):
+                if grid[i][j] == '.':
+                    r = check_voxel_circle(grid, i, j)
+                    if radius < r:
+                        radius = r
+        self.assertEqual(radius, 2)
+        grid = ['*.......*',
+                '*...*...*',
+                '*..*.*..*',
+                '*.*...*.*',
+                '**.....**',
+                '*.......*',
+                '*.......*',
+                '*.......*',
+                '*.......*']
+        for i in range(len(grid)):
+            for j in range(len(grid)):
+                if grid[i][j] == '.':
+                    r = check_voxel_circle(grid, i, j)
+                    if radius < r:
+                        radius = r
+        self.assertEqual(radius, 2)
 
 if __name__ == '__main__':
     size = int(input())
