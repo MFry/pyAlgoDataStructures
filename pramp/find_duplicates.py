@@ -1,13 +1,7 @@
-[1, 2, 3, 4][3, 4, 5, 6, 7]
-
-"""
-input: Arr1 and Arr2 of lengths n and m
-output: solution of values within both arrays
-"""
-
-
 def find_dups(arr1, arr2):  # [1,2,3,4] [3,4,5,6,7]
     """
+     input: Arr1 and Arr2 of lengths n and m
+     output: solution of values within both arrays
     1, m == n
     Time: O(m)
     :param arr1:
@@ -31,10 +25,6 @@ def find_dups(arr1, arr2):  # [1,2,3,4] [3,4,5,6,7]
             i_2 += 1
 
     return solution
-
-
-
-
 
 
 def binary_search(arr, val):
