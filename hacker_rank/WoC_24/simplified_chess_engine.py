@@ -5,6 +5,7 @@ import unittest
 
 
 def get_moves(piece, r, c, board):
+
     def check_valid(x, y):
         """
 
@@ -25,42 +26,42 @@ def get_moves(piece, r, c, board):
             return False
         return True
 
-    moves = []
+    def gen_moves(moves):
+        valid_moves = []
+        for move in moves:
+            x, y = r, c
+            while True:
+                x, y = x + move[0], y + move[1]
+                if not check_bounds(x, y) or check_valid(x, y):
+                    break
+                valid_moves.append((x, y))
+                if board[x][y] != piece['color']:
+                    break
+        return valid_moves
+
+    moved = []
     knight_moves = [(2, 1), (2, -1), (-2, 1), (-2, -1)]
     bishop_moves = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
     rook_moves = [(1, 0), (0, 1), (-1, 0), (0, -1)]
     p = piece['type']
+    # knight
     if p.lower() == 'n':
         for k_m in knight_moves:
             x, y = r + k_m[0], c + k_m[1]
             if check_bounds(x, y):
-                moves.append((r + k_m[0], c + k_m[1]))
-    elif p.lower() == 'q':
-        for q_m in rook_moves+bishop_moves:
-            x, y = r, c
-            while True:
-                x, y = x + q_m[0], y + q_m[1]
-                if not check_bounds(x, y):
-                    break
-                moves.append((x, y))
+                moved.append((r + k_m[0], c + k_m[1]))
+    # Bishop
     elif p.lower() == 'b':
-        for b_m in bishop_moves:
-            x, y = r, c
-            while True:
-                x, y = x + b_m[0], y + b_m[1]
-                if not check_bounds(x, y):
-                    break
-                moves.append(x, y)
+        moved = gen_moves(bishop_moves)
 
+    # Rook
     elif p.lower() == 'r':
-        for r_k in rook_moves:
-            x, y = r, c
-            while True:
-                x, y = x + r_k[0], y + r_k[1]
-                if not check_bounds(x, y):
-                    break
-                moves.append(x, y)
-    return [i for i in moves if check_valid(*i)]
+        moved = gen_moves(rook_moves)
+
+    # Queen
+    elif p.lower() == 'q':
+        moved = gen_moves(bishop_moves+rook_moves)
+    return moved
 
 
 class MyTestCases(unittest.TestCase):
@@ -69,8 +70,11 @@ class MyTestCases(unittest.TestCase):
                  ['', '', '', ''],
                  ['', {'type': 'n', 'color': 'w'}, '', ''],
                  ['', {'type': 'q', 'color': 'w'}, '', '']]
+        #check we selected a knight
         self.assertEqual(board[2][1]['type'], 'n')
+        # knight moves
         self.assertEqual(get_moves(board[2][1], 2, 1, board), [(0, 2), (0, 0)])
+
         self.assertEqual(board[3][1]['type'], 'q')
         print(get_moves(board[3][1], 3, 1, board))
         # self.assertEqual(get_moves(board[3][1], 3, 1, board))
