@@ -1,3 +1,11 @@
+"""
+
+Problem Reference: https://www.hackerrank.com/contests/w24/challenges/xor-matrix
+
+
+Difficulty: ****
+Required Knowledge: Combinatorics, Pascal's triangle
+"""
 from pprint import pprint
 from operator import xor
 import unittest
