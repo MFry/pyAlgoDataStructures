@@ -7,9 +7,21 @@ import unittest
 
 
 def misere_nim(piles):
-    pass
+    xor_piles = 0
+    for pile in piles:
+        xor_piles ^= pile
+    if xor_piles == 0:
+        if max(piles) > 1:
+            return 'Second'
+    elif xor_piles == 1:
+        if max(piles) <= 1:
+            return 'Second'
+    return 'First'
 
 
 class MyTestCases(unittest.TestCase):
     def test_misere_nim(self):
-        pass
+        piles = [1, 1]
+        self.assertEqual(misere_nim(piles), 'First')
+        piles = [2, 1, 3]
+        self.assertEqual(misere_nim(piles), 'Second')
