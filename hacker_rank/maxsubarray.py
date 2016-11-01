@@ -1,6 +1,7 @@
 """
     Difficulty: ***
     Code:       **
+    Required Knowledge: Dynamic Programming
     Ref: https://www.hackerrank.com/challenges/maxsubarray
 """
 import unittest
