@@ -66,7 +66,7 @@ def get_moves(piece, r, c, board):
 
 class MyTestCases(unittest.TestCase):
     def test_get_moves(self):
-        board = [[{'type': 'q', 'color': 'b'}, '', '', ''],
+        board = [[{'type': 'q', 'color': 'b'}, '', ''],
                  ['', '', '', ''],
                  ['', {'type': 'n', 'color': 'w'}, '', ''],
                  ['', {'type': 'q', 'color': 'w'}, '', '']]
