@@ -1,5 +1,5 @@
 """
-
+ ref: https://www.hackerrank.com/contests/w24/challenges/simplified-chess-engine
 """
 import unittest
 
@@ -40,7 +40,7 @@ def get_moves(piece, r, c, board):
         return valid_moves
 
     moved = []
-    knight_moves = [(2, 1), (2, -1), (-2, 1), (-2, -1)]
+    knight_moves = [(2, 1), (2, -1), (-2, 1),  (-2, -1), (-1, 2), (1, 2), (1, -2), (-1, -2)]
     bishop_moves = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
     rook_moves = [(1, 0), (0, 1), (-1, 0), (0, -1)]
     p = piece['type']
@@ -66,14 +66,14 @@ def get_moves(piece, r, c, board):
 
 class MyTestCases(unittest.TestCase):
     def test_get_moves(self):
-        board = [[{'type': 'q', 'color': 'b'}, '', '', ''],
+        board = [[{'type': 'q', 'color': 'b'}, '', ''],
                  ['', '', '', ''],
                  ['', {'type': 'n', 'color': 'w'}, '', ''],
                  ['', {'type': 'q', 'color': 'w'}, '', '']]
         #check we selected a knight
         self.assertEqual(board[2][1]['type'], 'n')
         # knight moves
-        self.assertEqual(get_moves(board[2][1], 2, 1, board), [(0, 2), (0, 0)])
+        self.assertEqual(get_moves(board[2][1], 2, 1, board), [(0, 2), (0, 0), (1,3), (3, 3)])
 
         self.assertEqual(board[3][1]['type'], 'q')
         print(get_moves(board[3][1], 3, 1, board))
