@@ -2,6 +2,8 @@ import unittest
 
 
 def array_left_rotation(a, n, k):
+    if len(a) != n or n <= 0 or k <= 0:
+        raise TypeError("Values a: {} , n: {} , or k: {} are not appropriate".format(a, n, k))
     rotated_a = []
     start = k % n
     end = start
