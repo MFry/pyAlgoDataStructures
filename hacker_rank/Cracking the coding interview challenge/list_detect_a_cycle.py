@@ -11,6 +11,8 @@ A Node is defined as:
 
 
 def has_cycle(head):
+    if not head:
+        return False
     single_skip_move = head
     double_skip_move = head
     while double_skip_move.next != None:
