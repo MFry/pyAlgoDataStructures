@@ -25,17 +25,18 @@ def is_matched(expression):
 
 class MyTestCases(unittest.TestCase):
     def test_is_matched(self):
-
         t1 = '{[()]}'
         self.assertTrue(is_matched(t1))
         t2 = '{[(])}'
+        self.assertFalse(is_matched(t2))
         t3 = '{{[[(())]]}}'
+        self.assertTrue(is_matched(t3))
 
-
-t = int(input().strip())
-for a0 in range(t):
-    expression = input().strip()
-    if is_matched(expression):
-        print("YES")
-    else:
-        print("NO")
+if __name__ == '__main__':
+    t = int(input().strip())
+    for a0 in range(t):
+        expression = input().strip()
+        if is_matched(expression):
+            print("YES")
+        else:
+            print("NO")
