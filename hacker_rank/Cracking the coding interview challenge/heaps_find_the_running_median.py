@@ -74,32 +74,30 @@ class RunningMedianContainer:
 
     def _rebalance(self):
         large_heap = self.min_heap if len(self.min_heap) > len(self.max_heap) else self.max_heap
-        small_heap = self.min_heap if len(self.min_heap) < len(self.max_heap) else self.max_heap
+        small_heap = self.max_heap if len(self.max_heap) < len(self.min_heap) else self.min_heap
         if len(large_heap) - len(small_heap) > 1:
             small_heap.push(large_heap.pop())
 
-    def getMedian(self):
-        max_heap = self.max_heap
-        min_heap = self.min_heap
-        if len(max_heap) == len(min_heap):
-            return (max_heap[0]+min_heap[0])/2
-        elif len(min_heap) > len(max_heap):
-            return min_heap[0]
+    def get_median(self):
+        large_heap = self.min_heap if len(self.min_heap) > len(self.max_heap) else self.max_heap
+        small_heap = self.max_heap if len(self.max_heap) < len(self.min_heap) else self.min_heap
+        if len(small_heap) == len(large_heap):
+            return (small_heap[0]+large_heap[0])/2
         else:
-            return max_heap[0]
+            return large_heap[0]
 
 
 class MyTestCases(unittest.TestCase):
     def test_running_median(self):
         medianContainer = RunningMedianContainer()
         medianContainer.add_element(1)
-        self.assertEqual(1, medianContainer.getMedian())
+        self.assertEqual(1, medianContainer.get_median())
         medianContainer.add_element(2)
-        self.assertEqual(1.5, medianContainer.getMedian())
+        self.assertEqual(1.5, medianContainer.get_median())
         medianContainer.add_element(3)
-        self.assertEqual(2, medianContainer.getMedian())
+        self.assertEqual(2, medianContainer.get_median())
         medianContainer.add_element(4)
-        self.assertEqual(2.5, medianContainer.getMedian())
+        self.assertEqual(2.5, medianContainer.get_median())
 
 
 if __name__ == '__main__':
@@ -108,4 +106,4 @@ if __name__ == '__main__':
     runningMedianContainer = RunningMedianContainer()
     for _ in range(n):
         runningMedianContainer.add_element(int(input().strip()))
-        print(runningMedianContainer.getMedian())
+        print(runningMedianContainer.get_median())
