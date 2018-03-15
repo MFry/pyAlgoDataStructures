@@ -15,14 +15,15 @@ def min_distance(s1, s2, cost=0):
 
 
 def levenshtein_distance_2d(s1, s2):
-    memo = [[0 for i in range(len(s1))] for j in range(len(s2))]
+    memo = [[0 for i in range(len(s1)+1)] for j in range(len(s2)+1)]
     for i in range(len(s1)):
-        for j in range(len(s2)):
-            if s1[:i] == s2[:j]:
-                memo[i][j] = 0
-            else:
-                memo[i][j] = min(memo[i-1][j]+1, memo[i][j-1]+1, memo[i-1]memo[j-1])
-
+        memo[0][i] = i
+    for i in range(1, len(s1)):
+        memo[i][0] = i
+        for j in range(1, len(s2)):
+            cost = 1 if s1[j-1] != s2[i-1] else 0
+            memo[i][j] = min(memo[i-1][j]+1, memo[i][j-1]+1, memo[i-1][j-1]+cost)
+    return memo[-1][-1]
 
 
 class TestLevenshteinDistance(unittest.TestCase):
@@ -32,3 +33,11 @@ class TestLevenshteinDistance(unittest.TestCase):
         self.assertEqual(min_distance('test', 'text'), 1)
         self.assertEqual(min_distance('ant', 'aunt'), 1)
         self.assertEqual(min_distance('min', 'max'), 2)
+        self.assertEqual(min_distance('cat', 'dog'), 3)
+
+    def test_dp_2d(self):
+        self.assertEqual(levenshtein_distance_2d('ant', 'ant'), 0)
+        self.assertEqual(levenshtein_distance_2d('test', 'text'), 1)
+        self.assertEqual(levenshtein_distance_2d('ant', 'aunt'), 1)
+        self.assertEqual(levenshtein_distance_2d('min', 'max'), 2)
+        self.assertEqual(levenshtein_distance_2d('cat', 'dog'), 3)
