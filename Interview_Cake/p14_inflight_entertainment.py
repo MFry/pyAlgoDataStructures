@@ -6,12 +6,11 @@ import unittest
 
 
 def find_two_movies_for_flight(flight_length, movie_lengths):
-    find_movie_pairs = {}
+    find_movie_pairs = set()
     for movie_length in movie_lengths:
-        if movie_length in find_movie_pairs:
+        if flight_length-movie_length in find_movie_pairs:
             return True
-        else:
-            find_movie_pairs[flight_length-movie_length] = True
+        find_movie_pairs.add(movie_length)
     return False
 
 
